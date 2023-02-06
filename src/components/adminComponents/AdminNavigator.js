@@ -12,6 +12,10 @@ import PeopleIcon from '@mui/icons-material/People';
 import SettingsSystemDaydreamSharpIcon from '@mui/icons-material/SettingsSystemDaydreamSharp';
 import MicSharpIcon from '@mui/icons-material/MicSharp';
 import LibraryMusicSharpIcon from '@mui/icons-material/LibraryMusicSharp';
+import {useState} from "react";
+import Typography from "@mui/material/Typography";
+import AdminMusicList from "./AdminMusicList";
+import AdminContent from "./AdminContent";
 
 const categories = [
     {
@@ -53,6 +57,15 @@ const itemCategory = {
 export default function AdminNavigator(props) {
     const { ...other } = props;
 
+    const [click,setClick] = useState(false);
+    const [selected, setSelected] = useState('');
+
+    const handleClick = (item) => {
+        setClick(true);
+        setSelected(item);
+        console.log (selected);
+    };
+
     return (
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
@@ -72,7 +85,7 @@ export default function AdminNavigator(props) {
                         </ListItem>
                         {children.map(({ id: childId, icon, active }) => (
                             <ListItem disablePadding key={childId}>
-                                <ListItemButton selected={active} sx={item}>
+                                <ListItemButton selected={active} sx={item} onClick={() => handleClick(childId)}>
                                     <ListItemIcon>{icon}</ListItemIcon>
                                     <ListItemText>{childId}</ListItemText>
                                 </ListItemButton>
@@ -81,7 +94,28 @@ export default function AdminNavigator(props) {
 
                         <Divider sx={{ mt: 2 }} />
                     </Box>
+
                 ))}
+                {click && (
+                    <div  >
+                        {selected === 'UserControl' && <AdminContent />}
+                        {selected === 'MusicControl' && <AdminMusicList />}
+                        {selected === 'SingerControl' && <Typography paragraph>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+                            enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+                            imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+                            Convallis convallis tellus id interdum velit laoreet id donec ultrices.
+                            Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                            adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
+                            nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
+                            leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
+                            feugiat vivamus at augue. At augue eget arcu dictum varius duis at
+                            consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
+                            sapien faucibus et molestie ac.
+                        </Typography>}
+                    </div>
+                )}
             </List>
         </Drawer>
     );
