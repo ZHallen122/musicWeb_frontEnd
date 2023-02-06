@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import AdminNavigator from './AdminNavigator';
-import AdminContent from './AdminContent';
+import AdminContent from './AdminMusicList';
 import AdminHeader from './AdminHeader';
 
 function Copyright() {
@@ -199,7 +199,7 @@ export default function Base() {
                 <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <AdminHeader onDrawerToggle={handleDrawerToggle} />
                     <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
-                        <AdminContent />
+
                     </Box>
                     <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
                         <Copyright />

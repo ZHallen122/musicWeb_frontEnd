@@ -6,6 +6,7 @@ import AdminHome from "./adminComponents/AdminHome";
 import AdminHeader from "./adminComponents/AdminHeader";
 import AdminContent from "./adminComponents/AdminContent";
 import AdminNavigator from "./adminComponents/AdminNavigator";
+import AdminMusicList from "./adminComponents/AdminMusicList";
 import Base from "./adminComponents/base";
 import {ADMIN_TOKEN_KEY} from "../Constants";
 
