@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import AdminNavigator from './AdminNavigator';
-import AdminContent from './AdminMusicList';
+import AdminContent from './AdminContent';
 import AdminHeader from './AdminHeader';
 import {useState} from "react";
 import AdminMusicList from "./AdminMusicList";
@@ -213,6 +213,7 @@ export default function Base() {
                     <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
                         {click && (
                             <div  >
+                                {selected === 'System Main Page' && <AdminContent />}
                                 {selected === 'UserControl' && <AdminContent />}
                                 {selected === 'MusicControl' && <AdminMusicList />}
                                 {selected === 'SingerControl' && <Typography paragraph>
