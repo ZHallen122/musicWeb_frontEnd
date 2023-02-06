@@ -29,3 +29,13 @@ export const signup = (data) => {
         }
     });
 };
+
+export const getAllMusic = () => {
+    return fetch(`/music/findAllMusic`).then((response) => {
+        if (response.status < 200 || response.status >= 300) {
+            throw Error("Fail to get All Music");
+        }
+
+        return response.json();
+    });
+};
