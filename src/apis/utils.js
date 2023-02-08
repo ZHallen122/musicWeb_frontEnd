@@ -1,18 +1,25 @@
 export const login = (credential) => {
-    const loginUrl = `/login?username=${credential.username}&password=${credential.password}`;
+    const loginUrl = `/admin/login?email=${credential.username}&password=${credential.password}`;
 
     return fetch(loginUrl, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
-        credentials: "include",
-    }).then((response) => {
-        if (response.status < 200 || response.status >= 300) {
-            throw Error("Fail to log in");
-        }
-    });
+        credentials: "include"
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                throw Error(data.message);
+            }
+
+            const token = data.data;
+            console.log("Token:", token);
+            return token;
+        });
 };
+
 
 export const signup = (data) => {
     const signupUrl = "/signup";
