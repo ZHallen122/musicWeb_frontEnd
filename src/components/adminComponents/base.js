@@ -6,8 +6,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import AdminNavigator from './AdminNavigator';
-import AdminContent from './AdminMusicList';
+import AdminContent from './AdminContent';
 import AdminHeader from './AdminHeader';
+import {useState} from "react";
+import AdminMusicList from "./AdminMusicList";
 
 function Copyright() {
     return (
@@ -166,9 +168,18 @@ theme = {
 
 const drawerWidth = 256;
 
-export default function Base() {
+export default function Base(props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
+
+    const [click,setClick] = useState(false);
+    const [selected, setSelected] = useState('');
+
+    const handleClick = (item) => {
+        setClick(true);
+        setSelected(item);
+        console.log (selected);
+    };
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -194,12 +205,33 @@ export default function Base() {
                     <AdminNavigator
                         PaperProps={{ style: { width: drawerWidth } }}
                         sx={{ display: { sm: 'block', xs: 'none' } }}
+                        handleClick = {handleClick}
                     />
                 </Box>
                 <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <AdminHeader onDrawerToggle={handleDrawerToggle} />
+                    <AdminHeader onDrawerToggle={handleDrawerToggle} handleLogOut={props.handleLogout}/>
                     <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
-
+                        {click && (
+                            <div  >
+                                {selected === 'System Main Page' && <AdminContent />}
+                                {selected === 'UserControl' && <AdminContent />}
+                                {selected === 'MusicControl' && <AdminMusicList />}
+                                {selected === 'SingerControl' && <Typography paragraph>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+                                    enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+                                    imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+                                    Convallis convallis tellus id interdum velit laoreet id donec ultrices.
+                                    Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
+                                    nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
+                                    leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
+                                    feugiat vivamus at augue. At augue eget arcu dictum varius duis at
+                                    consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
+                                    sapien faucibus et molestie ac.
+                                </Typography>}
+                            </div>
+                        )}
                     </Box>
                     <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
                         <Copyright />

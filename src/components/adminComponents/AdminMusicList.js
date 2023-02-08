@@ -1,13 +1,14 @@
 import { DataGrid } from '@mui/x-data-grid';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Toolbar from "@mui/material/Toolbar";
+import {getAllMusic} from "../../apis/utils";
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'Music Picture', width: 130 },
-    { field: 'lastName', headerName: 'Name', width: 130 },
+    { field: 'MusicPicture', headerName: 'Music Picture', width: 130 },
+    { field: 'Name', headerName: 'Name', width: 130 },
     {
         field: 'type',
         headerName: 'type',
@@ -15,7 +16,7 @@ const columns = [
         width: 90,
     },
     {
-        field: 'fullName',
+        field: 'Operation',
         headerName: 'Operation',
         description: 'This column has a value getter and is not sortable.',
         sortable: false,
@@ -26,23 +27,44 @@ const columns = [
 ];
 
 const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+    { id: 1, MusicPicture: 'null', Name: 'Jon', type: 'smooth', Operation: 'delete'},
 ];
 
+
+
 export default function AdminMusicList() {
+    const[musicData,setMusicData] = useState([]);
+    const [loadingRest, setLoadingRest] = useState(false);
+
+
+    const getMusicData = () => {
+        setMusicData(musicData.map(musicData => ({
+            id: musicData.id,
+            MusicPicture: musicData.MusicPicture,
+            Name: musicData.Name,
+            type: musicData.type,
+            Operation: musicData.Operation
+        })));
+    }
+
+    useEffect( () => {
+        setLoadingRest(true);
+        getAllMusic()
+            .then((data)=>{
+            setMusicData(data);
+            })
+                .catch((err)=>{
+
+                }).finally(() => {
+                    setLoadingRest(false);
+                });
+    },[]);
+
     return (
             <Toolbar>
                 <div style={{ height: 400, width: '100%' }}>
                     <DataGrid
-                        rows={rows}
+                        rows={musicData}
                         columns={columns}
                         pageSize={5}
                         rowsPerPageOptions={[5]}

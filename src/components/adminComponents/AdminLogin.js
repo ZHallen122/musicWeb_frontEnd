@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {Copyright} from "@mui/icons-material";
+import {login} from '../../apis/utils'
+import {Alert} from "@mui/material";
 
 function CopyRightText(props) {
     return (
@@ -28,14 +30,22 @@ function CopyRightText(props) {
 }
 const theme = createTheme();
 
-export default function AdminLogin() {
+export default function AdminLogin(props) {
+    const  {handleLogin} = props;
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const username = data.get("email");
+        const password = data.get("password");
+
+        login({username, password})
+            .then((token) => {
+                handleLogin(token);
+            })
+            .catch(() => {
+            })
+            .finally();
     };
 
     return (

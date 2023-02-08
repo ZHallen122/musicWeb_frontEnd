@@ -14,7 +14,7 @@ import Tabs from '@mui/material/Tabs';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import LogoutIcon from '@mui/icons-material/Logout';
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 function AdminHeader(props) {
@@ -42,6 +42,11 @@ function AdminHeader(props) {
                                     <NotificationsIcon />
                                 </IconButton>
                             </Tooltip>
+                        </Grid>
+                        <Grid item>
+                            <IconButton color="inherit">
+                                <LogoutIcon onClick={props.handleLogOut}/>
+                            </IconButton>
                         </Grid>
                         <Grid item>
                             <IconButton color="inherit" sx={{ p: 0.5 }}>
