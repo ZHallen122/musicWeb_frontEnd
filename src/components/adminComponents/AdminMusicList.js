@@ -7,14 +7,15 @@ import {getAllMusic} from "../../apis/utils";
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'MusicPicture', headerName: 'Music Picture', width: 130 },
-    { field: 'Name', headerName: 'Name', width: 130 },
+    { field: 'pic', headerName: 'Music Picture', width: 130 },
+    { field: 'name', headerName: 'Name', width: 130 },
     {
         field: 'type',
         headerName: 'type',
         type: 'number',
         width: 90,
-    },
+    },{field: 'introduction', headerName: 'Introduction', width: 300},
+    {field: 'moreInfomation', headerName: 'More Information', width: 130},
     {
         field: 'Operation',
         headerName: 'Operation',
@@ -26,38 +27,33 @@ const columns = [
     },
 ];
 
-const rows = [
-    { id: 1, MusicPicture: 'null', Name: 'Jon', type: 'smooth', Operation: 'delete'},
-];
-
-
-
 export default function AdminMusicList() {
     const[musicData,setMusicData] = useState([]);
     const [loadingRest, setLoadingRest] = useState(false);
 
 
-    const getMusicData = () => {
-        setMusicData(musicData.map(musicData => ({
-            id: musicData.id,
-            MusicPicture: musicData.MusicPicture,
-            Name: musicData.Name,
-            type: musicData.type,
-            Operation: musicData.Operation
-        })));
+    const getMusicData = (data) => {
+        console.log('getMusicData')
+        setMusicData(data);
+
+        console.log(musicData.id)
+        console.log(musicData.MusicPicture)
+        console.log(musicData.Name)
+        console.log(musicData.type)
     }
 
     useEffect( () => {
+        console.log("effect")
         setLoadingRest(true);
         getAllMusic()
             .then((data)=>{
-            setMusicData(data);
+                setMusicData(data.data);
             })
-                .catch((err)=>{
+            .catch((err)=>{
 
-                }).finally(() => {
-                    setLoadingRest(false);
-                });
+            }).finally(() => {
+            setLoadingRest(false);
+        });
     },[]);
 
     return (

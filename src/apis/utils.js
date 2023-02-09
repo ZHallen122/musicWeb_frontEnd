@@ -1,3 +1,5 @@
+import {ADMIN_TOKEN_KEY} from "../Constants";
+
 export const login = (credential) => {
     const loginUrl = `/admin/login?email=${credential.username}&password=${credential.password}`;
 
@@ -38,11 +40,15 @@ export const signup = (data) => {
 };
 
 export const getAllMusic = () => {
-    return fetch(`/music/findAllMusic`).then((response) => {
+    const token = localStorage.getItem(ADMIN_TOKEN_KEY);
+    return fetch(`/music/findAllMusic`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((response) => {
         if (response.status < 200 || response.status >= 300) {
             throw Error("Fail to get All Music");
         }
-
         return response.json();
     });
 };
