@@ -52,3 +52,56 @@ export const getAllMusic = () => {
         return response.json();
     });
 };
+
+export const DeleteMusic = (musicItem) => {
+    const token = localStorage.getItem(ADMIN_TOKEN_KEY);
+    const deleteMusicUrl = `/music/delete/${musicItem}`;
+    return fetch(deleteMusicUrl, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    }).then((response) => {
+        if (response.status < 200 || response.status >= 300) {
+            throw Error("Fail to delete");
+        }
+        return response.json();
+    });
+};
+
+
+export const AddMusic = (musicItems) => {
+    const token = localStorage.getItem(ADMIN_TOKEN_KEY);
+    const addMusicUrl = `/music/add/${musicItems}`;
+    return fetch(addMusicUrl, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    }).then((response) => {
+        if (response.status < 200 || response.status >= 300) {
+            throw Error("Fail to add music");
+        }
+    });
+};
+
+
+
+
+export const getAllSinger = () => {
+    const token = localStorage.getItem(ADMIN_TOKEN_KEY);
+    return fetch(`/singer/searchAllSinger`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((response) => {
+        if (response.status < 200 || response.status >= 300) {
+            throw Error("Fail to get All Singer");
+        }
+        return response.json();
+    });
+};
