@@ -10,6 +10,7 @@ import AdminContent from './AdminContent';
 import AdminHeader from './AdminHeader';
 import {useState} from "react";
 import AdminMusicList from "./AdminMusicList";
+import AdminUserTable from "./AdminUserTable";
 
 function Copyright() {
     return (
@@ -214,7 +215,7 @@ export default function Base(props) {
                         {click && (
                             <div  >
                                 {selected === 'System Main Page' && <AdminContent />}
-                                {selected === 'UserControl' && <AdminContent />}
+                                {selected === 'UserControl' && <AdminUserTable />}
                                 {selected === 'MusicControl' && <AdminMusicList />}
                                 {selected === 'SingerControl' && <Typography paragraph>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

@@ -52,3 +52,17 @@ export const getAllMusic = () => {
         return response.json();
     });
 };
+
+export const getAllUser = () => {
+    const token = localStorage.getItem(ADMIN_TOKEN_KEY);
+    return fetch(`/user/findAllUser`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((response) => {
+        if (response.status < 200 || response.status >= 300) {
+            throw Error("Fail to get All User");
+        }
+        return response.json();
+    });
+};
