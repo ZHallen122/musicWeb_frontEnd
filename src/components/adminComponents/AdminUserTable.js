@@ -4,21 +4,21 @@ import {useEffect, useState} from "react";
 import { getAllUser} from "../../apis/utils";
 
 const columns: GridColDef[] = [
-  { field: 'user_id', headerName: 'User ID', width: 70 },
-  { field: 'userName', headerName: 'User Name', width: 130 },
+  { field: 'user_id', headerName: 'User ID', width: 150 },
+  { field: 'userName', headerName: 'User Name', width: 150 },
   { field: 'email', headerName: 'Email', width: 70 },
-  { field: 'phone_number', headerName: 'Phone Number',type: 'number', width: 130 },
+  { field: 'phone_number', headerName: 'Phone Number',type: 'number', width: 150 },
   {
     field: 'create_time',
     headerName: 'CreateTime',
     type: 'number',
-    width: 130,
+    width: 150,
   },
   {
     field: 'update_time',
     headerName: 'UpdateTime',
     type: 'number',
-    width: 130,
+    width: 150,
   }
 ];
 
