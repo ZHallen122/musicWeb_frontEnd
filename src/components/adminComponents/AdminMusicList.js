@@ -36,6 +36,10 @@ export default function AdminMusicList() {
         console.log('getMusicData')
         setMusicData(data);
 
+        console.log(musicData.id)
+        console.log(musicData.MusicPicture)
+        console.log(musicData.Name)
+        console.log(musicData.type)
     }
 
     useEffect( () => {
